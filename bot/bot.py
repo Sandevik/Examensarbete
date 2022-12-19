@@ -9,19 +9,21 @@ REGEXPATTERN = "(\d{0,4}-?[A-Za-zåäöÅÄÖ]{3,}\.(se|nu))|(\d{0,4}-?[A-Za-zå
 def getInitalDomains():
     # Hämta Domäner och skapa en dictionary av dem, returna array med dictionary.
     convertedDomains = []
-    res = requests.get(SE_DOMAINS)
-    res = json.loads(res.text)
-    for i in range(len(res["data"])):
+    resSE = requests.get(SE_DOMAINS)
+    resSE = json.loads(resSE.text)
+    resNU = requests.get(NU_DOMAINS)
+    resNU = json.loads(resNU.text)
+    res = resSE["data"] + resNU["data"]
+    for i in range(len(res)):
         try:
-            convertedDomains.append(
-                {
-                    "url": idna.decode(res["data"][i]["name"]),
-                    "encodedURL" : res["data"][i]["name"],
-                    "availableBy" : res["data"][i]["release_at"]
-                })
-            
+           convertedDomains.append(
+               {
+                   "url": idna.decode(res[i]["name"]),
+                   "encodedURL" : res[i]["name"],
+                   "availableBy" : res[i]["release_at"]
+                })       
         except:
-            convertedDomains.append(res["data"][i]["name"])
+            convertedDomains.append(res[i]["name"])
     return convertedDomains
 def filterBadDomains(array):
     # Ranka domäners namn genom regexmatchning
@@ -32,7 +34,7 @@ def filterBadDomains(array):
                 "url": array[i]["url"],
                 "encodedURL" : array[i]["encodedURL"],
                 "availableBy" : array[i]["availableBy"],
-                "domainName": "bad"
+                "domainNameRating": "bad"
                 }
             newArray.append(obj)
         else:
@@ -40,13 +42,27 @@ def filterBadDomains(array):
                 "url": array[i]["url"],
                 "encodedURL" : array[i]["encodedURL"],
                 "availableBy" : array[i]["availableBy"],
-                "domainName": "ok"
+                "domainNameRating": "ok"
                 }
             newArray.append(obj)
     return newArray
-            
+
+def checkIfInFireBase(obj):
+    #Kolla om obj med domännamnet redan finns i firebase
+    pass
+def fetchMozValues():
+    #Skicka till moz och ta reda på domain ratings, external links m.m (De som är ok i domainNameRating)
+    pass
+def sendToFireBase():
+    #skicka värden till firebase
+    pass
+
+
+
 initalDomains = getInitalDomains()
 domains = filterBadDomains(initalDomains)
 print(domains)
+
+
 
 

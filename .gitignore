@@ -34,3 +34,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/bot/examensarbete-a4732-firebase-adminsdk-24swr-b794114203.json

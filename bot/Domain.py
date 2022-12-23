@@ -1,6 +1,6 @@
 import idna
 import re
-REGEXPATTERN = "(\d{0,4}-?[A-Za-zåäöÅÄÖ]{3,}\.(se|nu))|(\d{0,4}-?[A-Za-zåäöÅÄÖ]{3,}\d{0,3}\.(se|nu))"
+REGEXPATTERN = "(\d{0,2}-?[A-Za-zåäöÅÄÖ]{3,}\.(se|nu))|(\d{0,2}-?[A-Za-zåäöÅÄÖ]{3,}\d{0,3}\.(se|nu))"
 
 class Domain:
     def __init__(self, encodedDomainUrl, availableBy, domainNameRating = None, dR = None, externalLinks = None):
@@ -40,7 +40,7 @@ class Domain:
         self.lastCrawled = value
     def setPageTitle(self, value):
         self.pageTitle = value
-        self.liklyFree = "park" in value.lower()
+        self.liklyFree = "park" in value.lower() or "host" in value.lower() or "sale" in value.lower() or "domän" in value.lower() 
     def setPagesToPage(self, value):
         self.pagesToPage = value
     def setDomainAuth(self, value):

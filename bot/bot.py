@@ -1,4 +1,4 @@
-import json, requests, os, asyncio, datetime
+import json, requests, os, asyncio, datetime, time
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -7,9 +7,12 @@ from Domain import Domain
 SE_DOMAINS = "https://data.internetstiftelsen.se/bardate_domains.json"
 NU_DOMAINS = "https://data.internetstiftelsen.se/bardate_domains_nu.json"
 BASE_MOZ_URL = "https://lsapi.seomoz.com/v2/"
-MOZ_ACCESS_ID = "mozscape-c64bc021ef"
-MOZ_SECRET  = "da12db1db142707d76e2cdb657e5089b"
-REGEXPATTERN = "(\d{0,2}-?[A-Za-zåäöÅÄÖ]{3,}\.(se|nu))|(\d{0,4}-?[A-Za-zåäöÅÄÖ]{3,}\d{0,3}\.(se|nu))"
+MOZ_ACCESS_ID = ""
+MOZ_SECRET  = ""
+REGEXPATTERN = "(\d{0,2}-?[A-Za-zåäöÅÄÖ]{3,}\.(se|nu))|(\d{0,2}-?[A-Za-zåäöÅÄÖ]{3,}\d{0,3}\.(se|nu))"
+
+# ALLA värden som hämtas, hämtas innan 2022-01-23 då jag vill ha dem i närtid och att jag då kan få ut fler url:er i närtid
+
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"examensarbete-a4732-firebase-adminsdk-24swr-b794114203.json")
 cred = credentials.Certificate(file_path)
 app = firebase_admin.initialize_app(cred)
@@ -55,30 +58,27 @@ def fetchMozValues(domain):
     except:
         pass
 
-def run():
-
+async def run():
     maxDate = datetime.datetime(2023, 1, 23)
-
     mozReq = 0
     for i in range(len(domains)):
-        j = i+2401 # + 2400 då jag vill ha värden som är mer i mitten
+        j = i+37001 # ändrade denna för att få så många unika domäner som möjligt
         dateArray = domains[j].getAvailableBy().split("-")
         date = datetime.datetime(int(dateArray[0]) , int(dateArray[1]), int(dateArray[2]))
-        if domains[j].getDomainNameRating() == "ok" and date < maxDate and mozReq < 2500:
-            mozReq += 1
-            print(f"mozReq: {mozReq}, i: {i}")
+        mozReq += 1
+        if domains[j].getDomainNameRating() == "ok" and date < maxDate and mozReq <= 2500:
+            print(f"{domains[j].getDomain()}")
             fetchMozValues(domains[j])
+            time.sleep(2.5)
             sendToFireBase(domains[j])
-        #elif mozReq < 2500: # Om jag vill skicka alla som inte får värden till firebase.
-            # sendToFireBase(domains[j])  
-        else:
+        elif mozReq >= 2500:
             break
+        
 
     
 domains = []
 getInitalDomains()
-run()
-
+asyncio.run(run())
 
 
 

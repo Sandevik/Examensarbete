@@ -1,10 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { fetchDomainById } from '../../controllers/fetchDomainById'
 import type { IDomainValues, ServerErrorMessage } from '../../types'
-import useAuth from "../../Auth/hooks/useAuth"
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<IDomainValues | ServerErrorMessage>) {
-    const {user} = useAuth()
+    
+    /* TODO: Hämta user info från req */
+
+
     try {
         const {id} = req.query
         if (typeof id == "undefined"){

@@ -7,7 +7,6 @@ export const fetchDomainById = async (id: string, user: IUserDetails | null): Pr
     const docSnapShot = await getDoc(docRef)
     const docData = docSnapShot.data();
     if (docData){
-        
         const {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority} = docData
         if (user?.subscriptionType == "premium" || user?.userType == "admin"){
             return {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority}

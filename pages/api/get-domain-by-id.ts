@@ -1,15 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { fetchDomainById } from '../../controllers/fetchDomainById'
-import { IDomainValues, ServerErrorMessage } from '../../types'
-
+import type { IDomainValues, ServerErrorMessage } from '../../types'
+import useAuth from "../../Auth/hooks/useAuth"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<IDomainValues | ServerErrorMessage>) {
+    const {user} = useAuth()
     try {
         const {id} = req.query
         if (typeof id == "undefined"){
-            res.status(500).json({error: "id is not set"})
+            res.status(400).json({error: "id is not set"})
         }else{
-            const domain = await fetchDomainById(id.toString())
+            const domain = await fetchDomainById(id.toString(), user)
             if (domain){
                 res.status(200).json(domain)
             }else{

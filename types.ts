@@ -1,18 +1,32 @@
 export interface IDomainValues{
     availableBy: string;
-    likelyFree: boolean;
-    pageTitle: string;
-    domainNameRating: string;
-    pagesCrawledFromRoot: number;
+    likelyFree: boolean | null;
+    pageTitle: string | null;
+    domainNameRating: string | null;
+    pagesCrawledFromRoot: number | null;
     encodedDomainUrl: string;
-    externalLinks: number;
-    lastCrawled: string;
-    pagesToPage: number;
+    externalLinks: number | null;
+    lastCrawled: string | null;
+    pagesToPage: number | null;
     domainUrl: string;
-    pageAuthority: string;
-    spamScore: number;
-    domainAuthority: number;
+    pageAuthority: string | null;
+    spamScore: number | null;
+    domainAuthority: number | null;
     id?: string;
 }
 
 export type ServerErrorMessage = { error: string; }
+
+export interface IUserDetails{
+    uid: string;
+    displayName?: string | null;
+    photoURL?: string | null;
+    email?: string | null;
+    lastSignInTime?: string | null;
+    creationTime?: string | null;
+    name?: string;
+    subscriptionType?: "premium" | "standard" | "none";
+    userType?: "admin" | "user";
+}
+
+

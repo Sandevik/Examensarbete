@@ -1,22 +1,23 @@
 import React from 'react'
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+import { signOut } from "firebase/auth"
 import { auth } from '../firebase'
 import { signInWithGooglePopup } from '../Auth/controllers/signInWithGooglePopup'
 import useAuth from '../Auth/hooks/useAuth'
+import LoginCredentialsForm from '../components/login/loginCredentialsForm/LoginCredentialsForm'
+import ConnectedLoginCredentialsForm from '../components/login/loginCredentialsForm/ConnectedLoginCredentialsForm'
+import LoginProviderButton from '../components/login/LoginProviderButton'
+
 
 export default function Login() {
     const {user} = useAuth()
-    const login = () => {
-        signInWithEmailAndPassword(auth, "simon@test.com", "test123")
-    }
     const logOut = () => {
       signOut(auth);
     }
   return (
     <>
       {user? JSON.stringify(user) : "no uid"}
-      <button onClick={signInWithGooglePopup}>Sign in with google</button>
-      <button onClick={login}>Login</button>
+        <LoginProviderButton text='Logga in med Google' image={""} onSubmit={signInWithGooglePopup}/>
+        <ConnectedLoginCredentialsForm />
       <button onClick={logOut}>LogOut</button>
     </>
   )

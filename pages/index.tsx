@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 
 const Home: NextPage = () => {
   const {user} = useAuth()
-  console.log(user);
+
   
 
   return (

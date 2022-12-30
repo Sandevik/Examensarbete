@@ -17,13 +17,14 @@ export interface IDomainValues{
 export type ServerErrorMessage = { error: string; }
 export interface IUserDetails{
     uid: string;
-    displayName?: string | null;
-    photoURL?: string | null;
-    email?: string | null;
-    lastSignInTime?: string | null;
-    creationTime?: string | null;
-    name?: string;
-    subscriptionType?: "premium" | "standard" | "none";
+    displayName: string | null;
+    photoURL: string | null;
+    email: string | null;
+    lastSignInTime: string | null;
+    creationTime: string | null;
+    name: string | null;
+    phoneNumber: string | null;
+    subscriptionType?: "premium" | "standard";
     userType?: "admin" | "user";
 }
 

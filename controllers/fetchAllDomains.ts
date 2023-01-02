@@ -18,10 +18,10 @@ export const fetchAllDomains = async(uid: string | undefined) => {
           domains.push({availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority, id: doc.id})
         })
       }else{
-        querySnapshot.forEach(doc => {
+        /*querySnapshot.forEach(doc => {
           const {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority} = doc.data();
           domains.push({availableBy, likelyFree: null, pageTitle: null, domainNameRating: null, pagesCrawledFromRoot: null, encodedDomainUrl, externalLinks: null, lastCrawled: null, pagesToPage: null, domainUrl, pageAuthority: null, spamScore: null, domainAuthority: null, id: doc.id})
-        })
+        })*/
       }
     }else{
       querySnapshot.forEach(doc => {

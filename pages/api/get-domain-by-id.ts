@@ -5,7 +5,7 @@ import type { IDomainValues, ServerErrorMessage } from '../../types'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<IDomainValues | ServerErrorMessage>) {
     try {
-        const {uid, id} = req.body
+        const {uid, id} = await req.body
         if (typeof id == "undefined"){
             res.status(400).json({error: "id is not set"})
         }else{

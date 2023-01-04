@@ -1,9 +1,11 @@
 import Head from 'next/head'
-import { useDomains } from '../hooks/useDomains'
-
+import DomainMap from '../components/DomainMap';
+import DomainTable from '../components/DomainTable';
+import Loading from '../components/Loading';
+import { useAllDomains } from '../hooks/useAllDomains';
 
 export default function domains() {
-    const {domains, loading} = useDomains();
+    const {domains, loading} = useAllDomains()
 
     return (
         <div>
@@ -13,7 +15,7 @@ export default function domains() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-            {loading ? "Loading" : JSON.stringify(domains)}
+          {loading ? <Loading /> : <DomainTable domains={domains ? domains : []} />}
           
          
         </div>

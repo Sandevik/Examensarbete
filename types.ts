@@ -26,6 +26,7 @@ export interface IUserDetails{
     phoneNumber: string | null;
     subscriptionType?: "premium" | "standard";
     userType?: "admin" | "user";
+    liked?: IDomainValues[] | null;
 }
 
 

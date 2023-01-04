@@ -15,7 +15,7 @@ export const fetchDomainById = async (id: string, uid: string | undefined): Prom
         const {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority} = docData
         if (uid){
             const user = await fetchUserDetailsByUid(uid);
-            if (user?.subscriptionType == "premium" || user?.userType == "admin"){
+            if (user?.subscriptionType == "premium" || user?.userType == "admin" || docData.preview === true){
                 return {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority, id: docData.id}
             }else{
                 return {availableBy, likelyFree: null, pageTitle: null, domainNameRating: null, pagesCrawledFromRoot: null, encodedDomainUrl, externalLinks: null, lastCrawled: null, pagesToPage: null, domainUrl, pageAuthority: null, spamScore: null, domainAuthority: null, id: docData.id}

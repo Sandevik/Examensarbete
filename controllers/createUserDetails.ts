@@ -12,6 +12,7 @@ export const createUserDetails = async (user: IUserDetails) => {
         email: user.email,
         name: user.name,
         subscriptionType: user.subscriptionType,
-        userType: user.userType
+        userType: user.userType,
+        liked: []
     });
 }

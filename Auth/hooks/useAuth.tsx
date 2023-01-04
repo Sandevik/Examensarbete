@@ -27,6 +27,7 @@ export default function useAuth() {
             subscriptionType: details?.subscriptionType,
             userType: details?.userType,
             phoneNumber: details?.phoneNumber,
+            liked: details?.liked
           };
           setCurrentUser(changedUser);
         } else {

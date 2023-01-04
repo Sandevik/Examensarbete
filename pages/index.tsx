@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import useAuth from '../Auth/hooks/useAuth'
 import { useEffect } from 'react'
+import Loading from '../components/Loading'
 
 const Home: NextPage = () => {
   const {user} = useAuth()

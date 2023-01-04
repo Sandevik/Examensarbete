@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import useAuth from "../Auth/hooks/useAuth";
 import { IDomainValues } from "../types";
 
-export const useDomains = (id?: string) => {
-  const [domains, setDomains] = useState<IDomainValues[] | IDomainValues | undefined>(undefined);
+export const useSingleDomain = (id?: string) => {
+  const [domains, setDomains] = useState<IDomainValues | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useAuth();
   useEffect(() => {
     const getDomains = async () => {
       setLoading(true);
-      if (id) {
+      if (id !== undefined){
         let urlencoded = new URLSearchParams();
         urlencoded.append("uid", "CxeCaxdlkgZMO5inkzVaKJY9UKH3");
         urlencoded.append("id", id.toString());
@@ -27,21 +27,6 @@ export const useDomains = (id?: string) => {
             setDomains(data);
             setLoading(false);
           });
-        
-      } else {
-          await fetch("/api/get-domains", {
-            method: "POST",
-            cache: "force-cache",
-            body: JSON.stringify({ uid: user?.uid }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              setDomains(data);
-              setLoading(false);
-            });
       }
     };
     getDomains();

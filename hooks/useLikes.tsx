@@ -1,18 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import useAuth from '../Auth/hooks/useAuth'
-import { IDomainValues } from '../types'
+import { useContext } from "react"
+import { LikeContext, LikeContextUpdate } from "../context/LikeContext"
 
-
-export default function useLikes() {
-    const [likesList, setLikesList] = useState<IDomainValues[]>([])
-
-    const toggleLike = (domain: IDomainValues) => {
-        likesList.includes(domain) ? setLikesList(likesList.filter(like => like.id !== domain.id)) : setLikesList([...likesList, domain])
-    }
-
-    useEffect(()=>{
-        console.log(likesList)
-    }, [likesList])
-    
-    return {likesList, toggleLike}
+export const useLikes = () => {
+    return {likesList: useContext(LikeContext), toggleLike: useContext(LikeContextUpdate)}
 }

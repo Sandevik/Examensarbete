@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.16.2",
+    "@stripe/stripe-js": "^1.46.0",
     "firebase": "^9.15.0",
     "firebase-tools": "^11.18.0",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "stripe": "^11.5.0",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

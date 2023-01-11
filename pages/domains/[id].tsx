@@ -1,20 +1,24 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Loading from '../../components/Loading'
-import useLikes from '../../hooks/useLikes'
+import useCheckLike from '../../hooks/useCheckLike'
 import { useSingleDomain } from '../../hooks/useSingleDomain'
-import type {IDomainValues} from "../../types"
+import { useLikes } from '../../hooks/useLikes'
+import LikeIcon from '../../components/LikeIcon'
+import LikeButton from '../../components/LikeButton'
+
+
 
 export default function id() {
     const router = useRouter()
-    const { likesList , toggleLike} = useLikes()
+    const {toggleLike} = useLikes()
     const {id} = router.query
     const {domains: domain, loading} = useSingleDomain(id?.toString())
-
+    const {isLiked} = useCheckLike(domain, loading)
+    
   return (
     <div>
         {loading ? <Loading />: 
-        
         <Wrapper>
           <h1>{domain?.id}</h1>
           <h2>Tillgänglig: {domain?.availableBy}</h2>
@@ -29,7 +33,7 @@ export default function id() {
           <div>Sidor Krypta Från Rotdomän: {domain?.pagesCrawledFromRoot}</div>
           <div>Sidlänkar till Sidan: {domain?.pagesToPage}</div>
           <div>Spam Poäng: {domain?.spamScore}</div>
-          <button onClick={()=> domain? toggleLike(domain) : ""}>Like</button>
+          {domain && <LikeButton isLiked={isLiked} domain={domain}/>}
           
         </Wrapper>
         

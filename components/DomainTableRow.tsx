@@ -1,16 +1,23 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiArrowRight } from "react-icons/fi";
 import { IDomainValues } from "../types";
+import useCheckLike from "../hooks/useCheckLike";
+import { useLikes } from "../hooks/useLikes";
+import LikeIcon from "./LikeIcon";
+import LikeButton from "./LikeButton";
 interface IProps {
   domain: IDomainValues;
 }
 
 export default function DomainTableRow({ domain }: IProps) {
+  const {toggleLike} = useLikes()
+  const {isLiked} = useCheckLike(domain)
+  
   return (
     <Block>
-      <div>{domain.id}</div>
+      <Url><LikeButton isLiked={isLiked} domain={domain}/>{domain.id}</Url>
       <div>{domain.availableBy}</div>
       <div className="disappearSecond">
         {domain.pageTitle !== "" ? domain.pageTitle : <em>Ingen sid titel</em>}
@@ -90,4 +97,10 @@ const Block = styled.div`
       display: none;
     }
   }
+`;
+
+const Url = styled.div`
+  display:flex;
+  justify-content:space-between;
+  width:100%;
 `;

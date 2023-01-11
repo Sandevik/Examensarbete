@@ -3,16 +3,18 @@ import React from "react";
 import styled from "styled-components";
 import { logOut } from "../Auth/controllers/logOut";
 import useAuth from "../Auth/hooks/useAuth";
+import { useLikes } from "../hooks/useLikes";
 
 export default function Header() {
   const {user} = useAuth();
+  const {likesList} = useLikes()
   return (
     <HeaderWrapper>
       <Link href="/">Logo</Link>
       <nav>
         <ul>
           <li><Link href="/domains">Domäner</Link></li>
-          <li><Link href="/liked">Gillade</Link></li>
+          <li><Link href="/liked">{likesList.length} Gillade</Link></li>
           {user?.userType === "admin" ? 
             <>
               <li>Konton</li>
@@ -22,7 +24,7 @@ export default function Header() {
             ""
           }
           <li className="konto">
-            {user? <div className="konto-btn">Mitt Konto</div> : <Link href="/login">Logga in</Link>}
+            {user? <Link href="/account" className="konto-btn">Mitt Konto</Link> : <Link href="/login">Logga in</Link>}
             {user? <button className="login" onClick={logOut}>Logga ut</button> : ""}
           </li>
         </ul>

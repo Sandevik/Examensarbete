@@ -18,16 +18,17 @@ export default function DomainTable({ domains }: DomainTableProps) {
         <div className="disappearFirst">Sid Auktoritet</div>
         <div>...</div>
       </div>
-      {domains?.map((domain) => <DomainTableRow domain={domain} />)}
+      {domains?.map((domain) => <DomainTableRow key={domain.id} domain={domain} />)}
     </Block>
   );
 }
 
 const Block = styled.div`
-  max-width: 1440px;
+  width:100vw;
   margin-inline: auto;
-
+  max-width: 1440px;
   .headings{
+    
     text-align:center;
     position: sticky;
     top: 4em;

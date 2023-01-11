@@ -15,6 +15,7 @@ export interface IDomainValues{
     id?: string;
 }
 export type ServerErrorMessage = { error: string; }
+
 export interface IUserDetails{
     uid: string;
     displayName: string | null;

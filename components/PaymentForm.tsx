@@ -31,7 +31,7 @@ export default function PaymentForm() {
                 },
                 body: JSON.stringify({
                     name: credentials.name,
-                    email: credentials.email,
+                    email: credentials.email || user?.email,
                     paymentMethod: paymentMethod?.paymentMethod?.id,
                     uid: user?.uid
                 })

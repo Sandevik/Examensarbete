@@ -1,24 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-import { IDomainValues } from "../types";
+import { filterOptions, IDomainValues } from "../../types";
+import DomainTableHeaderElement from "./DomainTableHeaderElement";
 import DomainTableRow from "./DomainTableRow";
 interface DomainTableProps {
   domains: IDomainValues[];
+  updateSort: (by: filterOptions) => void;
+  currentFilter: filterOptions;
 }
 
-export default function DomainTable({ domains }: DomainTableProps) {
+export default function DomainTable({ domains, updateSort, currentFilter }: DomainTableProps) {
   return (
     <Block>
       <div className="headings">
-        <div>Domän</div>
-        <div>Utgångsdatum</div>
+        <DomainTableHeaderElement title={"Domän"} currentFilter={currentFilter} onClick={()=> updateSort("domainName")} />
+        <DomainTableHeaderElement title={"Utgångsdatum"} currentFilter={currentFilter} onClick={()=> updateSort("availabilityDate")} />
         <div className="disappearSecond">Nuvarande Sidtitel</div>
-        <div className="disappearSecond">Domän Auktoritet</div>
-        <div className="disappearFirst">Externa Länkar</div>
-        <div className="disappearFirst">Sid Auktoritet</div>
+        <div className="disappearSecond">
+          <DomainTableHeaderElement title={"Domän Auktoritet"} currentFilter={currentFilter} onClick={()=> updateSort("domainAuthority")} />
+        </div>
+        <div className="disappearFirst">
+          <DomainTableHeaderElement title={"Externa Länkar"} currentFilter={currentFilter} onClick={()=>updateSort("externalLinks")}/>
+        </div>
+        <div className="disappearFirst">
+          <DomainTableHeaderElement title={"Sid Auktoritet"} currentFilter={currentFilter} onClick={()=>updateSort("pageAuthority")}  />
+        </div>
         <div>...</div>
       </div>
-      {domains?.map((domain) => <DomainTableRow key={domain.id} domain={domain} />)}
+      {domains?.map((domain, i) => <DomainTableRow key={i} domain={domain} />)}
     </Block>
   );
 }

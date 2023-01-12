@@ -6,18 +6,18 @@ import useAuth from "../Auth/hooks/useAuth";
 import { useLikes } from "../hooks/useLikes";
 
 export default function Header() {
-  const {user} = useAuth();
+  const {user, loading} = useAuth();
   const {likesList} = useLikes()
   return (
     <HeaderWrapper>
       <Link href="/">Logo</Link>
       <nav>
-        <ul>
+        {!loading && <ul>
           <li><Link href="/domains">Domäner</Link></li>
           <li><Link href="/liked">{likesList.length} Gillade</Link></li>
           {user?.userType === "admin" ? 
             <>
-              <li>Konton</li>
+              <Link href="/accounts">Konton</Link>
               <li>Preview</li>
             </>
             :
@@ -27,7 +27,7 @@ export default function Header() {
             {user? <Link href="/account" className="konto-btn">Mitt Konto</Link> : <Link href="/login">Logga in</Link>}
             {user? <button className="login" onClick={logOut}>Logga ut</button> : ""}
           </li>
-        </ul>
+        </ul>}
       </nav>
     </HeaderWrapper>
   );

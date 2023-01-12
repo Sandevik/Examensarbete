@@ -6,11 +6,13 @@ import { fetchUserDetailsByUid } from "../../controllers/fetchUserDetailsByUid";
 
 export default function useAuth() {
   const [currentUser, setCurrentUser] = useState<IUserDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const unSub = () => {
       onAuthStateChanged(auth, async (user) => {
         if (user) {
+          setLoading(true);
           const details = await fetchUserDetailsByUid(user.uid);
           const changedUser: IUserDetails = {
             uid: user.uid,
@@ -25,18 +27,20 @@ export default function useAuth() {
               : null,
             name: details?.name,
             subscriptionType: details?.subscriptionType,
-            userType: details?.userType,
+            userType: details?.userType ? details.userType : "user",
             phoneNumber: details?.phoneNumber,
             liked: details?.liked
           };
           setCurrentUser(changedUser);
+          setLoading(false);
         } else {
           setCurrentUser(null);
+          setLoading(false)
         }
       });
     };
     return () => unSub();
   }, []);
 
-  return { user: currentUser };
+  return { user: currentUser, loading };
 }

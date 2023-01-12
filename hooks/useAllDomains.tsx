@@ -5,10 +5,12 @@ import { IDomainValues } from "../types";
 export const useAllDomains = () => {
   const [domains, setDomains] = useState<IDomainValues[] | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
-  const { user } = useAuth();
+  const { user, loading: userLoading } = useAuth();
+  
   useEffect(() => {
     const getDomains = async () => {
-      setLoading(true);
+      if (!userLoading){
+        setLoading(true);
       await fetch("/api/get-domains", {
         method: "POST",
         cache: "force-cache",
@@ -22,9 +24,10 @@ export const useAllDomains = () => {
           setDomains(data);
           setLoading(false);
         });
+      }
     };
     getDomains();
-  }, [user]);
+  }, [user, userLoading]);
 
   return { domains, loading };
 };

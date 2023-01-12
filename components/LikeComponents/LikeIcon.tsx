@@ -1,6 +1,6 @@
 import React from 'react'
 import {BsSuitHeartFill, BsSuitHeart} from "react-icons/Bs"
-import { IDomainValues } from '../types'
+import { IDomainValues } from '../../types'
 
 interface IButtonProps{
     state: boolean

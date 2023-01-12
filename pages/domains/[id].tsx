@@ -4,8 +4,8 @@ import Loading from '../../components/Loading'
 import useCheckLike from '../../hooks/useCheckLike'
 import { useSingleDomain } from '../../hooks/useSingleDomain'
 import { useLikes } from '../../hooks/useLikes'
-import LikeIcon from '../../components/LikeIcon'
-import LikeButton from '../../components/LikeButton'
+import LikeIcon from '../../components/LikeComponents/LikeIcon'
+import LikeButton from '../../components/LikeComponents/LikeButton'
 
 
 

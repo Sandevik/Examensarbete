@@ -2,11 +2,11 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiArrowRight } from "react-icons/fi";
-import { IDomainValues } from "../types";
-import useCheckLike from "../hooks/useCheckLike";
-import { useLikes } from "../hooks/useLikes";
-import LikeIcon from "./LikeIcon";
-import LikeButton from "./LikeButton";
+import { IDomainValues } from "../../types";
+import useCheckLike from "../../hooks/useCheckLike";
+import { useLikes } from "../../hooks/useLikes";
+import LikeIcon from "../LikeComponents/LikeIcon";
+import LikeButton from "../LikeComponents/LikeButton";
 interface IProps {
   domain: IDomainValues;
 }
@@ -24,7 +24,7 @@ export default function DomainTableRow({ domain }: IProps) {
       </div>
       <div className="disappearSecond">
         {domain.domainAuthority === null
-          ? "Upgradera för att se"
+          ? "Uppgradera för att se"
           : domain.domainAuthority}
       </div>
       <div className="disappearFirst">

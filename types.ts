@@ -9,10 +9,10 @@ export interface IDomainValues{
     lastCrawled: string | null;
     pagesToPage: number | null;
     domainUrl: string;
-    pageAuthority: string | null;
+    pageAuthority: number | null;
     spamScore: number | null;
     domainAuthority: number | null;
-    id?: string;
+    id: string;
 }
 export type ServerErrorMessage = { error: string; }
 
@@ -30,4 +30,5 @@ export interface IUserDetails{
     liked?: IDomainValues[] | null;
 }
 
+export type filterOptions = "domainName" | "availabilityDate" | "domainAuthority" | "externalLinks" | "pageAuthority" | undefined;
 

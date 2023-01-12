@@ -9,15 +9,7 @@ export const signInWithGooglePopup = async () => {
     const provider = new GoogleAuthProvider();
     const response = await signInWithPopup(auth, provider)
     .then(res => {
-        return res.user;
-    })
-    .catch(error => {
-        return error
-    })
-    
-    
-    if (response.uid){
-        const dbUser = await fetchUserDetailsByUid(response.uid)
+        const dbUser = fetchUserDetailsByUid(res.user.uid)
         if (!dbUser){
             const newUser: IUserDetails = {
                uid: response.uid,
@@ -33,6 +25,12 @@ export const signInWithGooglePopup = async () => {
             }
             createUserDetails(newUser)
         }
-    }
+    })
+    .catch(error => {
+        return error
+    })
+    
+    
+    
 
 }

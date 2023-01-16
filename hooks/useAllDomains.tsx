@@ -20,7 +20,7 @@ export const useAllDomains = () => {
         },
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: IDomainValues[]) => {
           setDomains(data);
           setLoading(false);
         });

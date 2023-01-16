@@ -2,15 +2,12 @@ import Head from 'next/head'
 import DomainTable from '../components/domains/DomainTable';
 import Loading from '../components/Loading';
 import SubHero from '../components/SubHero';
-import { useAllDomains } from '../hooks/useAllDomains';
 import { useDomainSort } from '../hooks/useDomainSort';
 
 
 export default function domains() {
     const {filteredList, currentFilter, loading, updateSort} = useDomainSort()
     
-    
-
     return (
         <div>
           <Head>

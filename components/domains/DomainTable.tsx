@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useAuth from "../../Auth/hooks/useAuth";
 import { filterOptions, IDomainValues } from "../../types";
 import DomainTableHeaderElement from "./DomainTableHeaderElement";
 import DomainTableRow from "./DomainTableRow";
@@ -10,6 +11,7 @@ interface DomainTableProps {
 }
 
 export default function DomainTable({ domains, updateSort, currentFilter }: DomainTableProps) {
+  const {user, loading} = useAuth()
   return (
     <Block>
       <div className="headings">
@@ -27,7 +29,24 @@ export default function DomainTable({ domains, updateSort, currentFilter }: Doma
         </div>
         <div>...</div>
       </div>
-      {domains?.map((domain, i) => <DomainTableRow key={i} domain={domain} />)}
+      {/* Få preview domäner att renderas först (ovanför) */}
+      {domains?.map(domain => {
+        if (domain.onPreview){
+          return <DomainTableRow key={domain.id} domain={domain} />
+        }
+      })}
+      {/* Domäner som inte är previewed renderas under previewed */}
+      {domains?.map((domain) => {
+        if (!domain.onPreview){
+          if (domain.hidden && user?.userType === "admin"){
+            return <DomainTableRow key={domain.id} domain={domain} /> 
+          }else if(domain.hidden && user?.userType !== "admin"){
+            return
+          }else if(!domain.hidden){
+            return <DomainTableRow key={domain.id} domain={domain} /> 
+          }
+        }
+      })}
     </Block>
   );
 }

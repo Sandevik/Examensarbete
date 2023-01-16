@@ -5,11 +5,11 @@ import { IDomainValues } from "../types";
 export const useSingleDomain = (id?: string) => {
   const [domains, setDomains] = useState<IDomainValues | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
-  const { user } = useAuth();
+  const { user, loading: userLoading } = useAuth();
   useEffect(() => {
     const getDomains = async () => {
       setLoading(true);
-      if (id !== undefined){
+      if (id !== undefined && !userLoading){
         let urlencoded = new URLSearchParams();
         urlencoded.append("uid", "CxeCaxdlkgZMO5inkzVaKJY9UKH3");
         urlencoded.append("id", id.toString());

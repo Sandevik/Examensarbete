@@ -13,6 +13,8 @@ export interface IDomainValues{
     spamScore: number | null;
     domainAuthority: number | null;
     id: string;
+    hidden: boolean | undefined;
+    onPreview: boolean | undefined;
 }
 export type ServerErrorMessage = { error: string; }
 

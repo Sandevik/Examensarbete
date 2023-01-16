@@ -11,7 +11,7 @@ export default function Login() {
     const {user} = useAuth()
     const router = useRouter()
     if (user){
-      router.push("/");
+      router.back();
     }
   return (
     <>

@@ -22,6 +22,8 @@ export default function id() {
 
     useEffect(()=>{
       setDomainProps(domain)
+      console.log(domain);
+      
     },[domain])
 
     const handlePreviewChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

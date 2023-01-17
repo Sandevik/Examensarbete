@@ -12,29 +12,28 @@ interface IProps {
 }
 
 export default function DomainTableRow({ domain }: IProps) {
-  const {toggleLike} = useLikes()
   const {isLiked} = useCheckLike(domain)
   
   return (
     <Block>
-      <Url><LikeButton isLiked={isLiked} domain={domain}/>{domain.id}</Url>
+      <Url><LikeButton isLiked={isLiked} domain={domain}/><div className={domain.onPreview ? "highlight" : ""}>{domain.id}</div></Url>
       <div>{domain.availableBy}</div>
       <div className="disappearSecond">
         {domain.pageTitle !== "" ? domain.pageTitle : <em>Ingen sid titel</em>}
       </div>
       <div className="disappearSecond">
         {domain.domainAuthority === null
-          ? "Uppgradera för att se"
+          ? "Uppgradera"
           : domain.domainAuthority}
       </div>
       <div className="disappearFirst">
         {domain.externalLinks === null
-          ? "Uppgradera för att se"
+          ? "Uppgradera"
           : domain.externalLinks}
       </div>
       <div className="disappearFirst">
         {domain.pageAuthority === null
-          ? "Uppgradera för att se"
+          ? "Uppgradera"
           : domain.pageAuthority}
       </div>
       <div>
@@ -97,10 +96,14 @@ const Block = styled.div`
       display: none;
     }
   }
+
+  
+
 `;
 
 const Url = styled.div`
   display:flex;
   justify-content:space-between;
   width:100%;
+
 `;

@@ -29,12 +29,15 @@ export default function DomainTable({ domains, updateSort, currentFilter }: Doma
         </div>
         <div>...</div>
       </div>
+      <h3 className={"center"}>Förhandsvisade</h3>
       {/* Få preview domäner att renderas först (ovanför) */}
       {domains?.map(domain => {
         if (domain.onPreview){
           return <DomainTableRow key={domain.id} domain={domain} />
         }
       })}
+
+      <h3 className={"center"}>Alla domäner</h3>
       {/* Domäner som inte är previewed renderas under previewed */}
       {domains?.map((domain) => {
         if (!domain.onPreview){
@@ -56,11 +59,17 @@ const Block = styled.div`
   margin-inline: auto;
   max-width: 1440px;
   .headings{
-    
     text-align:center;
     position: sticky;
     top: 4em;
   }
+
+  .center{
+      text-align:center;
+      border-bottom: 1px solid black;
+      max-width:30em;
+      margin-inline:auto;
+    }
 
   @media screen and (min-width: 769px) {
     .headings {
@@ -112,6 +121,7 @@ const Block = styled.div`
     .disappearSecond{
         display:none;
     }
-    
+
   }
 `;
+

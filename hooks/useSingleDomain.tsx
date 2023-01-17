@@ -11,7 +11,7 @@ export const useSingleDomain = (id?: string) => {
       setLoading(true);
       if (id !== undefined && !userLoading){
         let urlencoded = new URLSearchParams();
-        urlencoded.append("uid", "CxeCaxdlkgZMO5inkzVaKJY9UKH3");
+        urlencoded.append("uid", user?.uid ? user.uid : "");
         urlencoded.append("id", id.toString());
 
         await fetch("/api/get-domain-by-id", {

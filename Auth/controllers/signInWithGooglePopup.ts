@@ -7,21 +7,21 @@ import { IUserDetails } from "../../types";
 export const signInWithGooglePopup = async () => {
     auth.languageCode = "sv"
     const provider = new GoogleAuthProvider();
-    const response = await signInWithPopup(auth, provider)
-    .then(res => {
-        const dbUser = fetchUserDetailsByUid(res.user.uid)
+   await signInWithPopup(auth, provider)
+    .then( async (res) => {
+        const dbUser = await fetchUserDetailsByUid(res.user.uid)
         if (!dbUser){
             const newUser: IUserDetails = {
-               uid: response.uid,
-               name: response.displayName,
-               photoURL: response.photoURL,
-               email: response.email,
-               lastSignInTime: response.lastSignInTime,
-               creationTime: response.creationTime,
-               displayName: response.displayName,
+               uid: res.user.uid,
+               name: res.user.displayName,
+               photoURL: res.user.photoURL,
+               email: res.user.email,
+               lastSignInTime: res.user.metadata.lastSignInTime ? res.user.metadata.lastSignInTime : "" ,
+               creationTime: res.user.metadata.creationTime ? res.user.metadata.creationTime : "" ,
+               displayName: res.user.displayName,
                subscriptionType: "standard",
                userType: "user",
-               phoneNumber: response.phoneNumber
+               phoneNumber: res.user.phoneNumber
             }
             createUserDetails(newUser)
         }

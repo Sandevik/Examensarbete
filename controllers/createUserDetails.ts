@@ -1,11 +1,11 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { IUserDetails } from "../types";
 
 
-export const createUserDetails = async (user: IUserDetails) => {
+export const createUserDetails = (user: IUserDetails) => {    
     const userRef = doc(db, "users", user.uid)
-    await setDoc(userRef, {
+    setDoc(userRef, {
         uid: user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL,
@@ -13,6 +13,5 @@ export const createUserDetails = async (user: IUserDetails) => {
         name: user.name,
         subscriptionType: user.subscriptionType,
         userType: user.userType,
-        liked: []
     });
 }

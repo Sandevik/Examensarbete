@@ -4,7 +4,7 @@ import {db} from "../firebase"
 import { fetchUserDetailsByUid } from "./fetchUserDetailsByUid";
 
 
-export const fetchDomainById = async (id: string, uid: string | undefined): Promise<IDomainValues | undefined> => {
+export const fetchDomainById = async (id: string, uid: string): Promise<IDomainValues | undefined> => {
     // Hämta referenser till domänen
     const docRef = doc(db, "domains", id);
     const docSnapShot = await getDoc(docRef)
@@ -21,7 +21,7 @@ export const fetchDomainById = async (id: string, uid: string | undefined): Prom
                 return {availableBy, likelyFree: null, pageTitle: null, domainNameRating: null, pagesCrawledFromRoot: null, encodedDomainUrl, externalLinks: null, lastCrawled: null, pagesToPage: null, domainUrl, pageAuthority: null, spamScore: null, domainAuthority: null, id: docData.id, onPreview: onPreview ? onPreview : false, hidden: hidden ? hidden : false}
             }
         }
-    }else if (docData && !uid){
+    }else if (docData && !uid || docData?.onPreview === true){
         const {availableBy, likelyFree, pageTitle, domainNameRating, pagesCrawledFromRoot, encodedDomainUrl, externalLinks, lastCrawled, pagesToPage, domainUrl, pageAuthority, spamScore, domainAuthority, onPreview, hidden} = docData
         return {availableBy, likelyFree: null, pageTitle: null, domainNameRating: null, pagesCrawledFromRoot: null, encodedDomainUrl, externalLinks: null, lastCrawled: null, pagesToPage: null, domainUrl, pageAuthority: null, spamScore: null, domainAuthority: null, id: docData.id, onPreview: onPreview ? onPreview : false, hidden: hidden ? hidden : false}
     }else{

@@ -6,7 +6,7 @@ import { useDomainSort } from '../hooks/useDomainSort';
 
 
 export default function domains() {
-    const {filteredList, currentFilter, loading, updateSort} = useDomainSort()
+    const {filteredList, currentFilter, loading, updateSort, incrementPageIndex} = useDomainSort()
     
     return (
         <div>
@@ -19,7 +19,7 @@ export default function domains() {
             <h1>Domäner</h1>
           </SubHero>
 
-          {loading ? <Loading /> : filteredList ? <DomainTable currentFilter={currentFilter} updateSort={updateSort} domains={filteredList} /> : "Inga domäner kunde hittas"}         
+          {loading ? <Loading /> : filteredList ? <DomainTable incrementPageIndex={incrementPageIndex} currentFilter={currentFilter} updateSort={updateSort} domains={filteredList} /> : "Inga domäner kunde hittas"}         
         </div>
       )
 }

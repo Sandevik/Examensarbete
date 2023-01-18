@@ -8,9 +8,10 @@ interface DomainTableProps {
   domains: IDomainValues[];
   updateSort: (by: filterOptions) => void;
   currentFilter: filterOptions;
+  incrementPageIndex: () => void;
 }
 
-export default function DomainTable({ domains, updateSort, currentFilter }: DomainTableProps) {
+export default function DomainTable({ domains, updateSort, currentFilter, incrementPageIndex }: DomainTableProps) {
   const {user, loading} = useAuth()
   return (
     <Block>
@@ -50,6 +51,7 @@ export default function DomainTable({ domains, updateSort, currentFilter }: Doma
           }
         }
       })}
+      <button onClick={()=>incrementPageIndex()}>Load more</button>
     </Block>
   );
 }

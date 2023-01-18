@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { logOut } from "../Auth/controllers/logOut";
 import useAuth from "../Auth/hooks/useAuth";
 import { useLikes } from "../hooks/useLikes";
-import {BsSuitHeart, BsSuitHeartFill} from "react-icons/bs"
+import {BsSuitHeart, BsSuitHeartFill} from "react-icons/Bs"
 
 export default function Header() {
   const {user, loading} = useAuth();

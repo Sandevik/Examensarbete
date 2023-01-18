@@ -29,7 +29,6 @@ export interface IUserDetails{
     phoneNumber: string | null;
     subscriptionType?: "premium" | "standard";
     userType?: "admin" | "user";
-    liked?: IDomainValues[] | null;
 }
 
 export type filterOptions = "domainName" | "availabilityDate" | "domainAuthority" | "externalLinks" | "pageAuthority" | undefined;

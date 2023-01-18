@@ -14,7 +14,8 @@ export default function SubHero({children}: ISubHeroProps) {
 
 const Block = styled.section`
     height: 14em;
-    background-color:gray;
+    background-color:var(--green);
+    color: white;
     display:grid;
     place-items:center
 `;

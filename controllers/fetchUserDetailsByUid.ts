@@ -16,7 +16,6 @@ export const fetchUserDetailsByUid = async (uid: string) => {
       subscriptionType: await userData?.subscriptionType,
       userType: await userData?.userType,
       phoneNumber: await userData?.phoneNumber,
-      liked: await userData?.liked,
       creationTime: await userData?.creationTime ? userData?.creationTime : null,
       lastSignInTime: await userData?.lastSignInTime ? userData?.lastSignInTime : null
     }

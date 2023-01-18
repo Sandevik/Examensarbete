@@ -25,11 +25,11 @@ export default function useAuth() {
             creationTime: user.metadata.creationTime
               ? user.metadata.creationTime
               : null,
-            name: details?.name,
+            name: details?.name ? details.name : null,
             subscriptionType: details?.subscriptionType,
             userType: details?.userType ? details.userType : "user",
-            phoneNumber: details?.phoneNumber,
-            liked: details?.liked
+            phoneNumber: details?.phoneNumber ? details.phoneNumber : null,
+            
           };
           setCurrentUser(changedUser);
           setLoading(false);

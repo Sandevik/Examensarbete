@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { logOut } from "../Auth/controllers/logOut";
 import useAuth from "../Auth/hooks/useAuth";
 import { useLikes } from "../hooks/useLikes";
+import {BsSuitHeart, BsSuitHeartFill} from "react-icons/bs"
 
 export default function Header() {
   const {user, loading} = useAuth();
@@ -14,7 +15,7 @@ export default function Header() {
       <nav>
         {!loading && <ul>
           <li><Link href="/domains">Domäner</Link></li>
-          <li><Link href="/liked">{likesList.length} Gillade</Link></li>
+          <li ><Link href="/liked" className="liked"> <div>{likesList.length}</div> {likesList.length ? <BsSuitHeartFill className="heart"/> : <BsSuitHeart className="heart"/>} </Link></li>
           {user?.userType === "admin" ? 
             <>
               <Link href="/accounts">Konton</Link>
@@ -57,6 +58,26 @@ const HeaderWrapper = styled.header`
       }
     }
   }
+
+  .liked{
+    font-size: 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+  
+  }
+
+  li:has(.liked){
+    color: black;
+    :hover svg{
+      
+      color: var(--green)
+    }
+  }
+  
+
+
 
   .konto{
     .login{

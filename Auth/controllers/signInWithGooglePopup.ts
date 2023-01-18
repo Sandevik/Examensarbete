@@ -21,7 +21,7 @@ export const signInWithGooglePopup = async () => {
                displayName: res.user.displayName,
                subscriptionType: "standard",
                userType: "user",
-               phoneNumber: res.user.phoneNumber
+               phoneNumber: res.user.phoneNumber ? res.user.phoneNumber : null
             }
             createUserDetails(newUser)
         }

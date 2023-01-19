@@ -25,6 +25,7 @@ export default function account() {
     const answer = prompt("Skriv DELETE");
     if (answer === "DELETE"){
       removeUser(user)
+      logOut()
     }else{
       alert("Borttagning hindrad, återgår...")
     }

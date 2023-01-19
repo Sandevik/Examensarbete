@@ -6,9 +6,9 @@ import { IDomainValues, ServerErrorMessage } from '../../types';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<IDomainValues[] | ServerErrorMessage>) {
     try {
-        const {index, uid} = req.body
+        const {lastDomain, uid} = req.body        
         // Hämtar 25 domäner efter index*25
-        res.status(200).json(await fetchDomainGroupByIndex(index ? index : undefined, uid))
+        res.status(200).json(await fetchDomainGroupByIndex(lastDomain ? lastDomain : undefined, uid))
     } catch (error) {
         console.log(error);
         res.status(500).json({error: "internal server error"})

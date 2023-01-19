@@ -6,7 +6,7 @@ import { filterOptions, IDomainValues } from "../types";
 
 
 export const useDomainSort = () => {
-    const {domains, loading, incrementPageIndex} = useAllDomains()
+    const {domains, loading, updateDomains} = useAllDomains()
     const [currentFilter, setCurrentFilter] = useState<filterOptions>()
     const [filteredList, setFilteredList] = useState<IDomainValues[]>([])
     
@@ -63,5 +63,5 @@ export const useDomainSort = () => {
         sort()
     },[domains, currentFilter])
 
-    return {filteredList, currentFilter, loading, updateSort, incrementPageIndex}
+    return {filteredList, currentFilter, loading, updateSort, updateDomains}
 }

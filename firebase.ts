@@ -3,8 +3,9 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 
-/* 
+/*
 Riktig
+*/
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3gmxC_gHVtC-zc7WzaWjxK7JylLZgNBU",
@@ -15,9 +16,9 @@ const firebaseConfig = {
   appId: "1:198327788774:web:72c09aee6db63cfc908727",
   measurementId: "G-EYCF856E3F"
 };
-*/
 
 //   vv test db vv   //
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyDEneGm1OhMkteQdt9XVawkt5WJIGbdmhQ",
   authDomain: "testdb-d6b0d.firebaseapp.com",
@@ -26,6 +27,7 @@ const firebaseConfig = {
   messagingSenderId: "371963720804",
   appId: "1:371963720804:web:33898daa09ebb0ea2b5b71"
 }
+*/
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

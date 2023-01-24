@@ -5,13 +5,19 @@ import { logOut } from "../Auth/controllers/logOut";
 import useAuth from "../Auth/hooks/useAuth";
 import { useLikes } from "../hooks/useLikes";
 import {BsSuitHeart, BsSuitHeartFill} from "react-icons/Bs"
+import MenuButton from "./MenuButton";
+interface IHeaderProps{
+  toggleMenu: () => void;
+  menuState: boolean;
+}
 
-export default function Header() {
+export default function Header({toggleMenu, menuState}: IHeaderProps) {
   const {user, loading} = useAuth();
   const {likesList} = useLikes()
   return (
     <HeaderWrapper>
-      <Link href="/">Logo</Link>
+      <Block>
+      <Link href="/">DomainSnapper</Link>
       <nav>
         {!loading && <ul>
           <li><Link href="/domains">Domäner</Link></li>
@@ -30,23 +36,31 @@ export default function Header() {
           </li>
         </ul>}
       </nav>
+      <div className="menuBtn"><MenuButton onClick={()=>toggleMenu()} menuState={menuState}/></div>
+      </Block>
     </HeaderWrapper>
   );
 }
 
 const HeaderWrapper = styled.header`
   height: 4em;
-  display: flex;
-  align-items: center;
   position:sticky;
   top:0;
+  justify-content:space-between;
+  background-color: var(--green);
+
+`;
+
+const Block = styled.div`
+  display: flex;
+  align-items: center;
   justify-content:space-between;
   padding-inline: 2em;
   background-color: transparent;
   max-width:1440px;
   margin-inline:auto;
-  background-color:white;
-  
+  height:100%;
+  color:white;
 
   nav {
     ul{
@@ -56,6 +70,21 @@ const HeaderWrapper = styled.header`
       li{
         cursor:pointer;
       }
+    }
+    
+  }
+  .menuBtn{
+      display:none;
+  }
+
+  @media screen and (max-width: 768px){
+    nav{
+      display:none;
+    }
+    .menuBtn{
+      display: flex;
+      align-items:center;
+      justify-content:center;
     }
   }
 
@@ -69,16 +98,13 @@ const HeaderWrapper = styled.header`
   }
 
   li:has(.liked){
-    color: black;
+    color: white;
     :hover svg{
       
       color: var(--green)
     }
   }
   
-
-
-
   .konto{
     .login{
       position:absolute;

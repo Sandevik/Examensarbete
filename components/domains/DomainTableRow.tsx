@@ -16,28 +16,28 @@ export default function DomainTableRow({ domain }: IProps) {
   
   return (
     <Block>
-      <Url><LikeButton isLiked={isLiked} domain={domain}/><div className={domain.onPreview ? "highlight" : ""}>{domain.id}</div></Url>
+      <Url><LikeButton isLiked={isLiked} domain={domain}/><div className={domain.onPreview ? "highlight" : ""}><Link href={`/domains/${domain.domainUrl}`}>{domain.domainUrl.length > 9 ? domain.domainUrl.slice(0,9)+"..." : domain.domainUrl}</Link></div></Url>
       <div>{domain.availableBy}</div>
       <div className="disappearSecond">
-        {domain.pageTitle !== "" ? domain.pageTitle : <em>Ingen sid titel</em>}
+        {domain.pageTitle !== "" ? domain.domainUrl.length > 14 ? domain.domainUrl.slice(0,14)+"..." : domain.domainUrl : <em>Ingen sid titel</em>}
       </div>
       <div className="disappearSecond">
         {domain.domainAuthority === null
-          ? "Uppgradera"
+          ? <Link href="/account">Uppgradera</Link>
           : domain.domainAuthority}
       </div>
       <div className="disappearFirst">
         {domain.externalLinks === null
-          ? "Uppgradera"
+          ? <Link href="/account">Uppgradera</Link>
           : domain.externalLinks}
       </div>
       <div className="disappearFirst">
         {domain.pageAuthority === null
-          ? "Uppgradera"
+          ? <Link href="/account">Uppgradera</Link>
           : domain.pageAuthority}
       </div>
       <div>
-        <Link href={`/domains/${domain.id}`}>
+        <Link href={`/domains/${domain.domainUrl}`}>
           <FiArrowRight />
         </Link>
       </div>

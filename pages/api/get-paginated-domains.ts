@@ -7,7 +7,7 @@ import { IDomainValues, ServerErrorMessage } from '../../types';
 export default async function handler(req: NextApiRequest, res: NextApiResponse<IDomainValues[] | ServerErrorMessage>) {
     try {
         const {lastDomain, uid} = req.body        
-        // Hämtar 25 domäner efter index*25
+        // Hämtar 10 domäner efter id:t på senaste domänen
         res.status(200).json(await fetchDomainGroupByIndex(lastDomain ? lastDomain : undefined, uid))
     } catch (error) {
         console.log(error);

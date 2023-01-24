@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import useAuth from "../../Auth/hooks/useAuth";
+import { usePreviewedDomain } from "../../hooks/usePreviewedDomains";
 import { filterOptions, IDomainValues } from "../../types";
+import Button from "../Button";
 import DomainTableHeaderElement from "./DomainTableHeaderElement";
 import DomainTableRow from "./DomainTableRow";
 interface DomainTableProps {
@@ -13,6 +15,7 @@ interface DomainTableProps {
 
 export default function DomainTable({ domains, updateSort, currentFilter, updateDomains }: DomainTableProps) {
   const {user, loading} = useAuth()
+  const {previewedDomains} = usePreviewedDomain();
   return (
     <Block>
       <div className="headings">
@@ -30,13 +33,17 @@ export default function DomainTable({ domains, updateSort, currentFilter, update
         </div>
         <div>...</div>
       </div>
-      <h3 className={"center"}>Förhandsvisade</h3>
-      {/* Få preview domäner att renderas först (ovanför) */}
-      {domains?.map(domain => {
-        if (domain.onPreview){
-          return <DomainTableRow key={domain.id} domain={domain} />
-        }
-      })}
+      {previewedDomains.length > 0 &&
+        <>
+          <h3 className={"center"}>Förhandsvisade</h3>
+          {/* Få preview domäner att renderas först (ovanför) */}
+          {previewedDomains?.map(domain => {
+            if (domain.onPreview){
+              return <DomainTableRow key={domain.domainUrl} domain={domain} />
+            }
+          })}
+        </>
+      }
 
       <h3 className={"center"}>Alla domäner</h3>
       {/* Domäner som inte är previewed renderas under previewed */}
@@ -51,7 +58,7 @@ export default function DomainTable({ domains, updateSort, currentFilter, update
           }
         }
       })}
-      <button onClick={()=>updateDomains()}>Load more</button>
+      <ButtonArea><Button text="Ladda fler" onClick={()=>updateDomains()} /></ButtonArea>
     </Block>
   );
 }
@@ -64,11 +71,12 @@ const Block = styled.div`
     text-align:center;
     position: sticky;
     top: 4em;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
 
   .center{
       text-align:center;
-      border-bottom: 1px solid black;
       max-width:30em;
       margin-inline:auto;
     }
@@ -78,7 +86,7 @@ const Block = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
       gap: 1em;
-      background-color: #cccccc;
+      background-color: var(--gray);
       height: 3em;
       place-items: center;
       margin-inline: auto;
@@ -91,7 +99,7 @@ const Block = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
       gap: 1em;
-      background-color: #cccccc;
+      background-color: var(--gray);
       height: 3em;
       place-items: center;
       margin-inline: auto;
@@ -111,7 +119,7 @@ const Block = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1em;
-      background-color: #cccccc;
+      background-color: var(--gray);
       height: 3em;
       place-items: center;
       margin-inline: auto;
@@ -127,3 +135,8 @@ const Block = styled.div`
   }
 `;
 
+const ButtonArea = styled.div`
+width:200px;
+margin-inline:auto;
+margin-block: 1em;
+`;

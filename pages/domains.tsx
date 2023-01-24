@@ -4,10 +4,8 @@ import Loading from '../components/Loading';
 import SubHero from '../components/SubHero';
 import { useDomainSort } from '../hooks/useDomainSort';
 
-
 export default function domains() {
     const {filteredList, currentFilter, loading, updateSort, updateDomains} = useDomainSort()
-    
     return (
         <div>
           <Head>

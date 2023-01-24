@@ -41,8 +41,7 @@ export default function account() {
           </SubHero>
           <Block>
           
-          <span>{user?.email}</span>
-          <div>
+          <div className="payment">
           {user?.subscriptionType !== "premium" && (
             <>
             <CardDetails>
@@ -50,16 +49,19 @@ export default function account() {
               <PaymentForm />
             </Elements>
             </CardDetails>
+            {user?.subscriptionType !== undefined ?
+            <div>Din nuvarande prenumeration: {user?.subscriptionType}</div>
+             : ""}
             <p>Uppgradera din prenumeration för att använda premium funktionerna, samt att få tillgång till premium värden.</p>
             </>
           )}
-          {user?.subscriptionType !== undefined ?
-            <div>Din nuvarande prenumeration: {user?.subscriptionType}</div>
-          : ""}
+          
           </div>
 
-          {user && <Button text="Logga ut" onClick={logOut} />}
-          {user && <DeleteButton text="Ta bort konto" onClick={handleRemoval} />}
+          <div className="btns">
+            {user && <div className="btn"><Button text="Logga ut" onClick={logOut} /></div>}
+            {user && <div className="btn"><DeleteButton text="Ta bort konto" onClick={handleRemoval} /></div>}
+          </div>
           {!user && <h3>Vänligen logga in för att visa ditt konto</h3> }
           </Block>
         </>
@@ -77,9 +79,27 @@ const Namn = styled.span`
 const Block = styled.div`
   max-width:1440px;
   margin-inline:auto;
+  padding:1em;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  .payment{
+    display:flex;
+    flex-direction:column
+  }
+
+  .btn{
+    width: 10em;
+  }
+  .btns{
+    display:flex;
+    gap:2em;
+  }
 `;
 
 const CardDetails = styled.div`
   margin-block:1em;
   width:20em;
+  margin-inline:auto;
 `;

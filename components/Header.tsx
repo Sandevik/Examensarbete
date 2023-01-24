@@ -25,7 +25,6 @@ export default function Header({toggleMenu, menuState}: IHeaderProps) {
           {user?.userType === "admin" ? 
             <>
               <Link href="/accounts">Konton</Link>
-              <li>Preview</li>
             </>
             :
             ""
@@ -48,6 +47,7 @@ const HeaderWrapper = styled.header`
   top:0;
   justify-content:space-between;
   background-color: var(--green);
+  z-index: 100;
 
 `;
 

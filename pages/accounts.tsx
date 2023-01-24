@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import useAuth from "../Auth/hooks/useAuth";
 import UserRow from "../components/users/UserRow";
 import { fetchAllUsers } from "../controllers/fetchAllUsers";
@@ -20,13 +21,21 @@ export default function accounts() {
   },[])
   
   return (
-    <>
+    <Block>
         {!loading && user?.userType === "admin" &&
         <div>
-            Antal användare: {users.length}
+            <div className="amount">Antal användare: {users.length}</div>
             {users.map(user => <UserRow key={user.uid} user={user}/>)}
         </div>
         }
-    </>
+    </Block>
   );
 }
+
+const Block = styled.div`
+  
+  .amount{
+    margin-block:2em;
+    text-align:center;
+  }
+`;

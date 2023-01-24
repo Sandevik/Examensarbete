@@ -27,7 +27,6 @@ export default function Sidemenu({ menuState, closeMenu }: ISidemenuProps) {
         {user?.userType === "admin" && 
         <>
             <li><Link href="/accounts" onClick={()=>closeMenu()}>Konton</Link></li>
-            <li><Link href="/preview" onClick={()=>closeMenu()}>Preview</Link></li>
         </>
         }
         
